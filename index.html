@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Reading Advantage - Transform Reading Skills in Just 30 Days</title>
+    <meta name="description" content="Revolutionary phonetic reading system used by thousands of students worldwide. Master reading with our proven 8-program methodology for just $9.99/month.">
+    
+    <!-- Google Analytics Placeholder - Replace GA_MEASUREMENT_ID with your actual ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
+    <style>
+        :root {
+            --primary-purple: #4b0082;
+            --primary-green: #1a7531;
+            --accent-orange: #ff6b35;
+            --success-green: #28a745;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --gradient-primary: linear-gradient(135deg, #4b0082, #6a1b9a);
+            --gradient-success: linear-gradient(135deg, #28a745, #20c997);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .shimmer-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            animation: shimmer 3s infinite;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Header */
+        .header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .header .tagline {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-heavy);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.4);
+        }
+        /* Professional Logo Section */
+        .logo-section {
+            background: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--primary-purple);
+        }
+        .pra-logo {
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--white) 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 2.8rem;
+            color: var(--primary-purple);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        /* Features Grid */
+        .features {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-purple);
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .feature-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-purple);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-orange);
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-purple);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        /* Pricing Section */
+        .pricing {
+            background: var(--light-bg);
+            padding: 80px 0;
+            text-align: center;
+        }
+        .pricing h2 {
+            font-size: 2.5rem;
+            color: var(--primary-purple);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .pricing-card {
+            background: var(--white);
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            border: 3px solid var(--success-green);
+            position: relative;
+        }
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success-green);
+            color: var(--white);
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .price {
+            font-size: 4rem;
+            color: var(--primary-purple);
+            font-weight: 800;
+            margin: 20px 0;
+        }
+        .price-period {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+        .pricing-features li {
+            padding: 10px 0;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+        .pricing-features li:before {
+            content: "✓";
+            color: var(--success-green);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        /* Teacher Section */
+        .teacher-section {
+            background: linear-gradient(135deg, var(--accent-orange), #ff8c42);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .teacher-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .teacher-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--white);
+            padding: 80px 0;
+        }
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary-green);
+            margin-bottom: 60px;
+            font-weight: 400;
+            font-family: Georgia, serif;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .testimonial-card {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            border-left: 5px solid var(--primary-purple);
+        }
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-purple);
+            font-size: 1rem;
+        }
+        .testimonial-role {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        /* Programs Section */
+        .programs {
+            background: var(--light-bg);
+            padding: 80px 0;
+        }
+        .programs h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-purple);
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .program-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        .program-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-purple);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .program-card p {
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .program-button {
+            background: var(--primary-purple);
+            color: var(--white);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .program-button:hover {
+            background: var(--accent-orange);
+            transform: scale(1.05);
+        }
+        /* Footer */
+        .footer {
+            background: var(--primary-purple);
+            color: var(--white);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        .footer h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .footer p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .header .tagline {
+                font-size: 1.1rem;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            .price {
+                font-size: 3rem;
+            }
+            .cta-button {
+                font-size: 1rem;
+                padding: 15px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <section class="header shimmer-effect">
+        <div class="container">
+            <h1>Pinnacle Reading Advantage</h1>
+            <p class="tagline">WORDS HAVE NO WHERE TO HIDE!</p>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Transform Reading Skills in Just 30 Days with Our Revolutionary Phonetic System</p>
+            <a href="#pricing" class="cta-button">Start Your Journey - Only $9.99/Month</a>
+        </div>
+    </section>
+    <!-- Professional Logo Section -->
+    <section class="logo-section">
+        <div class="container">
+            <svg class="pra-logo" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background Circle -->
+                <circle cx="200" cy="60" r="50" fill="#4b0082" stroke="#ff6b35" stroke-width="3"/>
+                
+                <!-- Star Burst -->
+                <g transform="translate(200,60)">
+                    <path d="M0,-40 L3,-12 L10,-10 L3,-8 L0,20 L-3,-8 L-10,-10 L-3,-12 Z" fill="#ffd700"/>
+                    <path d="M28,-28 L12,-3 L15,5 L8,3 L-28,28 L-8,3 L-15,5 L-12,-3 Z" fill="#ffd700"/>
+                    <path d="M40,0 L12,3 L10,10 L8,-3 L-40,0 L-8,-3 L-10,10 L-12,3 Z" fill="#ffd700"/>
+                </g>
+                
+                <!-- PRA Text -->
+                <text x="200" y="45" text-anchor="middle" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="white">PRA</text>
+                <text x="200" y="75" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="white">EST. 2024</text>
+                
+                <!-- Graduation Caps -->
+                <g transform="translate(150,40)">
+                    <rect x="0" y="0" width="20" height="3" fill="#ff6b35"/>
+                    <polygon points="10,0 5,-8 15,-8" fill="#1a7531"/>
+                    <circle cx="10" cy="-8" r="1" fill="#ffd700"/>
+                </g>
+                
+                <g transform="translate(230,40)">
+                    <rect x="0" y="0" width="20" height="3" fill="#ff6b35"/>
+                    <polygon points="10,0 5,-8 15,-8" fill="#1a7531"/>
+                    <circle cx="10" cy="-8" r="1" fill="#ffd700"/>
+                </g>
+                
+                <!-- Tagline -->
+                <text x="200" y="100" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#4b0082">WORDS HAVE NO WHERE TO HIDE!</text>
+            </svg>
+        </div>
+    </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Revolutionary Reading System Used by Thousands</h2>
+            <p>Join families worldwide who have transformed their children's reading abilities using our proven 8-program phonetic methodology. See results in just 30 days with systematic, science-based instruction.</p>
+            <a href="#pricing" class="cta-button">Get Instant Access</a>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Pinnacle Reading Advantage?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Systematic Phonetic Method</h3>
+                    <p>Our proven methodology teaches reading through systematic phonetic instruction, ensuring students master fundamental decoding skills for lifelong reading success.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>8 Complete Programs</h3>
+                    <p>Access our comprehensive suite: Magic Reading Charts, Word Workbooks, Sentence Workbooks, Word Wall, and complete user guides for systematic progression.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Results</h3>
+                    <p>Students typically see significant improvement within 30 days using our structured approach that builds confidence and reading fluency step by step.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family-Friendly</h3>
+                    <p>Designed for parents, teachers, and tutors. No special training required - our clear instructions guide you through every step of the learning process.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Proven Success</h3>
+                    <p>Used by thousands of families worldwide with documented success stories from struggling readers to advanced students achieving grade-level fluency.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Instant Access</h3>
+                    <p>Start immediately with instant access to all programs. Work at your own pace with lifetime access to updates and new materials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Transform Reading Skills Today</h2>
+            <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">Join thousands of families worldwide</p>
+            
+            <div class="pricing-card">
+                <div class="pricing-badge">Best Value</div>
+                <div class="price">$9.99</div>
+                <div class="price-period">per month</div>
+                
+                <ul class="pricing-features">
+                    <li>Complete 8-Program Reading System</li>
+                    <li>Magic Reading Charts with 480 Combinations</li>
+                    <li>Progressive Word & Sentence Workbooks</li>
+                    <li>Interactive Word Wall System</li>
+                    <li>Comprehensive User Guides</li>
+                    <li>Instant Access to All Materials</li>
+                    <li>Lifetime Updates & New Content</li>
+                    <li>Cancel Anytime</li>
+                </ul>
+                
+                <a href="#subscribe" class="cta-button" style="margin-top: 20px;">Start Your Subscription</a>
+            </div>
+            
+            <p style="margin-top: 30px; color: var(--text-light);">
+                <strong>30-Day Money-Back Guarantee</strong><br>
+                Not satisfied? Get a full refund within 30 days.
+            </p>
+        </div>
+    </section>
+    <!-- Teacher Section -->
+    <section class="teacher-section shimmer-effect">
+        <div class="container">
+            <h2>Designed by Educators, for Educators</h2>
+            <p>Our systematic approach is based on decades of educational research and classroom success. Whether you're a parent, teacher, or tutor, our programs provide the structure and support needed to help every student succeed.</p>
+            <p><strong>Perfect for homeschool families, reading specialists, and classroom teachers looking for proven results.</strong></p>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Listen to What Our Amazing Families Are Saying</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"My daughter went from struggling with basic words to reading chapter books in just 6 weeks! The systematic approach really works. She's gained so much confidence."</div>
+                    <div class="testimonial-author">Sarah Mitchell</div>
+                    <div class="testimonial-role">Parent, Colorado</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"As a reading specialist, I've tried many programs. PRA's phonetic method is the most effective I've used. My students show consistent improvement."</div>
+                    <div class="testimonial-author">Crystal Puglise</div>
+                    <div class="testimonial-role">Reading Specialist, Texas</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"The Word Wall program transformed our classroom. Students are excited about reading practice and their fluency scores have improved dramatically."</div>
+                    <div class="testimonial-author">Michael Rodriguez</div>
+                    <div class="testimonial-role">3rd Grade Teacher, California</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"I was skeptical about online reading programs, but PRA exceeded expectations. My son's reading level improved 2 grades in one semester!"</div>
+                    <div class="testimonial-author">Jennifer Chen</div>
+                    <div class="testimonial-role">Homeschool Parent, Florida</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"The Magic Reading Charts are genius! My struggling readers finally understand phonetic patterns. Their confidence has soared."</div>
+                    <div class="testimonial-author">David Siegal</div>
+                    <div class="testimonial-role">Title I Reading Coach, New York</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Best investment for our family! Both my kids use PRA and love the interactive challenges. Reading is fun again in our house."</div>
+                    <div class="testimonial-author">Amanda Thompson</div>
+                    <div class="testimonial-role">Parent of Two, Oregon</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"PRA's systematic approach helped my ESL students catch up to grade level. The visual components make learning accessible for all learners."</div>
+                    <div class="testimonial-author">Maria Gonzalez</div>
+                    <div class="testimonial-role">ESL Teacher, Arizona</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"My dyslexic son struggled for years until we found PRA. The multisensory approach finally clicked. He's reading independently now!"</div>
+                    <div class="testimonial-author">Robert Johnson</div>
+                    <div class="testimonial-role">Special Needs Parent, Michigan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Programs Section -->
+    <section class="programs">
+        <div class="container">
+            <h2>Complete 8-Program Reading System</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3>Magic Reading Charts</h3>
+                    <p>Foundation phonetic training with 480 syllable combinations and interactive flash modes for systematic skill building.</p>
+                    <a href="magic-charts.html" class="program-button">Explore Program</a>
+                </div>
+                
+                <div class="program-card">
+                    <h3>Pinnacle Reading Advantage</h3>
+                    <p>Advanced decoding practice with premium features, goal tracking, and comprehensive reading challenges.</p>
+                    <a href="pinnacle-reading-advantage.html" class="program-button">Start Learning</a>
+                </div>
+                
+                <div class="program-card">
+                    <h3>Word Workbook</h3>
+                    <p>63 pages of progressive vocabulary with 3,000+ words organized by syllable complexity for systematic growth.</p>
+                    <a href="workbook-pra-complete.html" class="program-button">Access Workbook</a>
+                </div>
+                
+                <div class="program-card">
+                    <h3>Sentence Workbook</h3>
+                    <p>Sentence-level reading fluency with progressive complexity to build comprehension and speed.</p>
+                    <a href="sentence-workbook-complete.html" class="program-button">Practice Sentences</a>
+                </div>
+                
+                <div class="program-card">
+                    <h3>Word Wall Complete</h3>
+                    <p>Customizable practice system with grid configuration, word management, and advanced practice modes.</p>
+                    <a href="word-wall-complete.html" class="program-button">Build Word Wall</a>
+                </div>
+                
+                <div class="program-card">
+                    <h3>Reading Challenge</h3>
+                    <p>Interactive achievement system with 25 goals across 5 levels for motivation and progress tracking.</p>
+                    <a href="pinnacle-reading-advantage-challenge.html" class="program-button">Take Challenge</a>
+                </div>
+                
+                <div class="program-card">
+                    <h3>User Guides</h3>
+                    <p>Comprehensive instructions and teaching strategies for maximizing the effectiveness of all programs.</p>
+                    <a href="#guides" class="program-button">View Guides</a>
+                </div>
+                
+                <div class="program-card">
+                    <h3>Progress Tracking</h3>
+                    <p>Built-in analytics and achievement systems to monitor student progress and celebrate milestones.</p>
+                    <a href="#progress" class="program-button">Track Progress</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <section class="footer">
+        <div class="container">
+            <h3>Ready to Transform Reading Skills?</h3>
+            <p>Join thousands of families worldwide who have discovered the power of systematic phonetic instruction.</p>
+            <a href="#pricing" class="cta-button">Start Your Journey - $9.99/Month</a>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pinnacle Reading Advantage. All rights reserved.</p>
+                <p>Systematic Phonetic Reading • Proven Results • Worldwide Success</p>
+            </div>
+        </div>
+    </section>
+    <!-- Simple Analytics Tracking -->
+    <script>
+        // Track button clicks
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'click', {
+                        'event_category': 'CTA',
+                        'event_label': this.textContent.trim()
+                    });
+                }
+            });
+        });
+        // Track program clicks
+        document.querySelectorAll('.program-button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'click', {
+                        'event_category': 'Program',
+                        'event_label': this.closest('.program-card').querySelector('h3').textContent
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
