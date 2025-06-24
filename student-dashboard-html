@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Pinnacle Reading Advantage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="1.5" fill="%23ffffff" opacity="0.1"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-50px) translateY(-50px); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .programs-grid {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #4ecdc4;
+        }
+
+        .program-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .program-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .program-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .program-description {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .program-level {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #8b4513;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .launch-button {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .launch-button:hover {
+            background: linear-gradient(135deg, #44a08d 0%, #3d8b7a 100%);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 40px 0 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <h1>📚 Student Dashboard</h1>
+            <p>Access all your Pinnacle Reading Advantage educational programs</p>
+        </div>
+
+        <div class="programs-grid">
+            <h2 class="section-title">Core Learning Programs</h2>
+            
+            <div class="program-card" onclick="launchProgram('decoding-blends-charts.html')">
+                <div class="program-icon">🔤</div>
+                <div class="program-title">Decoding Blends Charts</div>
+                <div class="program-level">Foundation Level</div>
+                <div class="program-description">Master phonetic foundations with 2-letter and 3-letter blends, 480 syllable combinations, and interactive flash modes.</div>
+                <button class="launch-button">Launch Program</button>
+            </div>
+
+            <div class="program-card" onclick="launchProgram('word-workbook-m.html')">
+                <div class="program-icon">📖</div>
+                <div class="program-title">Word Workbook</div>
+                <div class="program-level">Progressive Level</div>
+                <div class="program-description">63 pages of progressive vocabulary building with 3,000+ words, advancing from 1-syllable to 5-syllable complexity.</div>
+                <button class="launch-button">Launch Program</button>
+            </div>
+
+            <div class="program-card" onclick="launchProgram('sentence-workbook-complete.html')">
+                <div class="program-icon">📝</div>
+                <div class="program-title">Sentence Workbook</div>
+                <div class="program-level">Fluency Level</div>
+                <div class="program-description">Develop sentence-level reading fluency with progressive complexity and comprehensive practice exercises.</div>
+                <button class="launch-button">Launch Program</button>
+            </div>
+
+            <div class="program-card" onclick="launchProgram('word-wall-complete-m.html')">
+                <div class="program-icon">🏗️</div>
+                <div class="program-title">Word Wall Complete</div>
+                <div class="program-level">Practice Level</div>
+                <div class="program-description">Customizable practice system with grid configuration, word list management, and advanced practice modes.</div>
+                <button class="launch-button">Launch Program</button>
+            </div>
+
+            <div class="program-card" onclick="launchProgram('reading-pinnacle-adventure.html')">
+                <div class="program-icon">🎯</div>
+                <div class="program-title">Reading Pinnacle Adventure</div>
+                <div class="program-level">Challenge Level</div>
+                <div class="program-description">Interactive level-based completion system with achievement tracking and progress rewards.</div>
+                <button class="launch-button">Launch Program</button>
+            </div>
+
+            <h2 class="section-title">User Guides & Resources</h2>
+
+            <div class="program-card" onclick="launchProgram('decoding-blends-user-guide.html')">
+                <div class="program-icon">📋</div>
+                <div class="program-title">Decoding Blends User Guide</div>
+                <div class="program-level">Setup Guide</div>
+                <div class="program-description">Complete setup instructions and progression strategies for the Decoding Blends Charts program.</div>
+                <button class="launch-button">Open Guide</button>
+            </div>
+
+            <div class="program-card" onclick="launchProgram('word-workbook-user-guide-m.html')">
+                <div class="program-icon">📋</div>
+                <div class="program-title">Word Workbook User Guide</div>
+                <div class="program-level">Setup Guide</div>
+                <div class="program-description">Multi-syllabic word mastery approach and comprehensive usage instructions.</div>
+                <button class="launch-button">Open Guide</button>
+            </div>
+
+            <div class="program-card" onclick="launchProgram('sentence-workbook-guide.html')">
+                <div class="program-icon">📋</div>
+                <div class="program-title">Sentence Workbook User Guide</div>
+                <div class="program-level">Setup Guide</div>
+                <div class="program-description">Fluency development methodology and step-by-step progression instructions.</div>
+                <button class="launch-button">Open Guide</button>
+            </div>
+
+            <div class="program-card" onclick="launchProgram('word-wall-user-guide-m.html')">
+                <div class="program-icon">📋</div>
+                <div class="program-title">Word Wall User Guide</div>
+                <div class="program-level">Setup Guide</div>
+                <div class="program-description">Comprehensive feature utilization guide for maximizing Word Wall effectiveness.</div>
+                <button class="launch-button">Open Guide</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function launchProgram(filename) {
+            // Open the educational program in the same window
+            window.location.href = filename;
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.program-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
