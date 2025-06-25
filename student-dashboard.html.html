@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Student Dashboard - Pinnacle Reading Advantage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .program-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+        
+        .program-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .program-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .launch-button {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .launch-button:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+        }
+        
+        .special-features .launch-button {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+        
+        .special-features .launch-button:hover {
+            background: linear-gradient(135deg, #229954, #27ae60);
+        }
+        
+        .user-guides .launch-button {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+        
+        .user-guides .launch-button:hover {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎯 Student Dashboard</h1>
+        <p>Access all your Pinnacle Reading Advantage educational programs</p>
+    </header>
+
+    <div class="container">
+        <!-- Core Learning Programs -->
+        <section class="section">
+            <h2>📚 Core Learning Programs</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">🔤</div>
+                    <h3 class="program-title">Decoding Blends Charts</h3>
+                    <button class="launch-button" onclick="window.open('decoding-blends-charts-user-guide.html', '_blank')">🚀 Launch Program</button>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">📖</div>
+                    <h3 class="program-title">Word Workbook</h3>
+                    <button class="launch-button" onclick="window.open('workbook-pra-complete.html', '_blank')">🚀 Launch Program</button>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">📝</div>
+                    <h3 class="program-title">Sentence Workbook</h3>
+                    <button class="launch-button" onclick="window.open('sentence-workbook-complete.html', '_blank')">🚀 Launch Program</button>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">🎯</div>
+                    <h3 class="program-title">Word Wall Interactive</h3>
+                    <button class="launch-button" onclick="window.open('word-wall-complete-final.html', '_blank')">🚀 Launch Program</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Guides -->
+        <section class="section user-guides">
+            <h2>📖 User Guides</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">📘</div>
+                    <h3 class="program-title">Decoding Blends Guide</h3>
+                    <button class="launch-button" onclick="window.open('decoding-blends-charts-user-guide.html', '_blank')">📖 Open Guide</button>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">📗</div>
+                    <h3 class="program-title">Word Workbook Guide</h3>
+                    <button class="launch-button" onclick="window.open('word-workbook-guide.html', '_blank')">📖 Open Guide</button>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">📙</div>
+                    <h3 class="program-title">Sentence Workbook Guide</h3>
+                    <button class="launch-button" onclick="window.open('sentence-workbook-guide.html', '_blank')">📖 Open Guide</button>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-icon">📚</div>
+                    <h3 class="program-title">Word Wall Guide</h3>
+                    <button class="launch-button" onclick="window.open('word-wall-guide.html', '_blank')">📖 Open Guide</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Features -->
+        <section class="section special-features">
+            <h2>⭐ Special Features</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">🎯</div>
+                    <h3 class="program-title">Pinnacle Reading Advantage Challenge</h3>
+                    <button class="launch-button" onclick="window.open('pinnacle-reading-advantage-challenge.html', '_blank')">🎯 Start Challenge</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
