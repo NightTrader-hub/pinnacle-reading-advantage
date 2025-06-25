@@ -31,6 +31,28 @@
             padding: 20px;
         }
 
+        .back-to-dashboard {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #28a745, #34ce57);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-dashboard:hover {
+            background: linear-gradient(135deg, #34ce57, #40d568);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -2012,6 +2034,7 @@
     </style>
 </head>
 <body>
+    <a href="student-dashboard.html" class="back-to-dashboard">← Back to Dashboard</a>
     <header>
         <h1>Pinnacle Reading Advantage</h1>
         <p class="tagline">The Most Effective Learning to Read Program Ever Created</p>
