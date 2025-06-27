@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Reading Advantage Challenge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #ffd700, #40e0d0, #ffd700, #40e0d0);
+            background-size: 400% 400%;
+            animation: headerFlow 8s ease-in-out infinite;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes headerFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+
+
+        .header::before {
+            content: '🏆⭐🎯⭐🏆';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 26px;
+            animation: sparkle 3s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateX(-50%) scale(1.3); }
+        }
+
+        .header h1 {
+            font-family: 'Comic Sans MS', 'Trebuchet MS', cursive, sans-serif;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+
+
+        .header p {
+            font-size: 1.8rem;
+            color: #6b2c70;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+        }
+
+        .goals-section {
+            padding: 40px;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .goal-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .goal-card.completed {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            transform: scale(1.02);
+        }
+
+        .goal-card.completed::before {
+            background: linear-gradient(45deg, #28a745, #20c997, #17a2b8);
+            animation: successGlow 2s ease infinite alternate;
+        }
+
+        @keyframes successGlow {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .goal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .goal-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .goal-card.completed .goal-number {
+            background: #28a745;
+        }
+
+        .goal-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .goal-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .goal-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .goal-button:hover::before {
+            left: 100%;
+        }
+
+        .goal-button:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6c5ce7);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .goal-button.completed {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            cursor: default;
+            animation: completedPulse 2s ease infinite;
+        }
+
+        @keyframes completedPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4); }
+            50% { box-shadow: 0 6px 25px rgba(40, 167, 69, 0.8); }
+        }
+
+        .goal-button.completed:hover {
+            transform: none;
+        }
+
+        .progress-summary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+
+        .progress-summary::before {
+            content: '🚀📊🎯📊🚀';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            animation: statsSparkle 4s ease infinite;
+        }
+
+        @keyframes statsSparkle {
+            0%, 100% { opacity: 0.8; transform: translateX(-50%) rotate(0deg); }
+            50% { opacity: 1; transform: translateX(-50%) rotate(10deg); }
+        }
+
+        .progress-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 16px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: numberGlow 3s ease infinite alternate;
+        }
+
+        @keyframes numberGlow {
+            0% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+            100% { text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.5); }
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+
+        .level-progress-container {
+            margin-top: 20px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .level-progress-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .level-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .level-progress-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            opacity: 0.95;
+        }
+
+        .level-progress-percentage {
+            font-size: 0.85rem;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+
+        .level-progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .level-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4a, #feca57);
+            border-radius: 6px;
+            transition: width 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 35%, rgba(255,255,255,0.5) 50%, transparent 65%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .level-progress-item.completed .level-progress-fill {
+            background: linear-gradient(90deg, #28a745, #20c997, #17a2b8);
+            animation: completedShimmer 3s ease infinite;
+        }
+
+        @keyframes completedShimmer {
+            0%, 100% { box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(40, 167, 69, 0.8); }
+        }
+
+        .back-to-dashboard {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-dashboard:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6c5ce7);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .completion-badge {
+            display: none;
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .completion-badge.show {
+            display: block;
+        }
+
+        .level-section {
+            margin-bottom: 50px;
+        }
+
+        .level-header {
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b, #4ecdc4);
+            background-size: 300% 300%;
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: levelGlow 6s ease infinite;
+        }
+
+        @keyframes levelGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .level-header::before {
+            content: '🎯';
+            position: absolute;
+            top: 15px;
+            left: 30px;
+            font-size: 30px;
+            animation: bounce 2s ease infinite;
+        }
+
+        .level-header::after {
+            content: '🎯';
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            font-size: 30px;
+            animation: bounce 2s ease infinite 1s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .level-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            animation: numberPulse 3s ease infinite;
+        }
+
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .level-title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .goals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-stats {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="student-dashboard.html" class="back-to-dashboard">← Back to Dashboard</a>
+    <div class="container">
+        <div class="header">
+            <h1>Pinnacle Reading Advantage Challenge</h1>
+            <p>Track your progress toward reading mastery with clear, achievable goals</p>
+        </div>
+
+        <div class="goals-section">
+            <div class="progress-summary">
+                <div class="progress-title">Your Progress</div>
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="completed-count">0</div>
+                        <div class="stat-label">Goals Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-count">24</div>
+                        <div class="stat-label">Total Goals</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="progress-percent">0%</div>
+                        <div class="stat-label">Overall Progress</div>
+                    </div>
+                </div>
+                
+                <!-- Individual Level Progress Bars -->
+                <div class="level-progress-container">
+                    <div class="level-progress-item">
+                        <div class="level-progress-header">
+                            <span class="level-progress-label">Level 1: Two-Letter Chart Challenge</span>
+                            <span class="level-progress-percentage" id="level1-percent">0%</span>
+                        </div>
+                        <div class="level-progress-bar">
+                            <div class="level-progress-fill" id="level1-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="level-progress-item">
+                        <div class="level-progress-header">
+                            <span class="level-progress-label">Level 2: Three-Letter Chart Adventure</span>
+                            <span class="level-progress-percentage" id="level2-percent">0%</span>
+                        </div>
+                        <div class="level-progress-bar">
+                            <div class="level-progress-fill" id="level2-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="level-progress-item">
+                        <div class="level-progress-header">
+                            <span class="level-progress-label">Level 3: Word Workbook Adventure</span>
+                            <span class="level-progress-percentage" id="level3-percent">0%</span>
+                        </div>
+                        <div class="level-progress-bar">
+                            <div class="level-progress-fill" id="level3-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="level-progress-item">
+                        <div class="level-progress-header">
+                            <span class="level-progress-label">Level 4: Sentence Workbook Quest</span>
+                            <span class="level-progress-percentage" id="level4-percent">0%</span>
+                        </div>
+                        <div class="level-progress-bar">
+                            <div class="level-progress-fill" id="level4-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="level-progress-item">
+                        <div class="level-progress-header">
+                            <span class="level-progress-label">Level 5: Word Wall Ultimate Challenge</span>
+                            <span class="level-progress-percentage" id="level5-percent">0%</span>
+                        </div>
+                        <div class="level-progress-bar">
+                            <div class="level-progress-fill" id="level5-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="completion-badge" id="completion-badge">
+                🏆 Congratulations! You've completed the Pinnacle Reading Advantage Challenge! 🏆
+            </div>
+
+            <!-- Level 1 Section -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">1</div>
+                    <div class="level-title">Two-Letter Chart Challenge</div>
+                </div>
+                <div class="goals-grid">
+                    <div class="goal-card" data-goal="goal1-1">
+                    <div class="goal-header">
+                        <div class="goal-number">1</div>
+                        <div class="goal-title">Column Speed Master</div>
+                    </div>
+                    <div class="goal-description">
+                        Master column reading - say all blends in each column within 20 seconds!
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal1-1')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal1-2">
+                    <div class="goal-header">
+                        <div class="goal-number">2</div>
+                        <div class="goal-title">Single Column Champion</div>
+                    </div>
+                    <div class="goal-description">
+                        Single column perfection - Random mode, 1 second timer, Flash mode, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal1-2')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal1-3">
+                    <div class="goal-header">
+                        <div class="goal-number">3</div>
+                        <div class="goal-title">Double Column Hero</div>
+                    </div>
+                    <div class="goal-description">
+                        Double column mastery - 2 columns, Random mode, 1 second timer, Flash mode, 20 blends in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal1-3')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal1-4">
+                    <div class="goal-header">
+                        <div class="goal-number">4</div>
+                        <div class="goal-title">Triple Column Star</div>
+                    </div>
+                    <div class="goal-description">
+                        Triple column excellence - 3 columns, Random mode, 1 second timer, Flash mode, 20 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal1-4')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal1-5">
+                    <div class="goal-header">
+                        <div class="goal-number">5</div>
+                        <div class="goal-title">Quad Column Legend</div>
+                    </div>
+                    <div class="goal-description">
+                        Quad column domination - 4 columns, Random mode, 1 second timer, Flash mode, 20 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal1-5')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal1-6">
+                    <div class="goal-header">
+                        <div class="goal-number">6</div>
+                        <div class="goal-title">Five Column Master</div>
+                    </div>
+                    <div class="goal-description">
+                        Five column supremacy - 5 columns, Random mode, 1 second timer, Flash mode, 20 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal1-6')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal1-7">
+                    <div class="goal-header">
+                        <div class="goal-number">7</div>
+                        <div class="goal-title">Two-Letter Chart MASTER</div>
+                    </div>
+                    <div class="goal-description">
+                        ULTIMATE CHALLENGE - Entire Two-Letter Chart, Random mode, 1 second timer, Flash mode, 30 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal1-7')">Mark Complete</button>
+                </div>
+                </div>
+            </div>
+
+            <!-- Level 2 Section -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">2</div>
+                    <div class="level-title">Three-Letter Chart Adventure</div>
+                </div>
+                <div class="goals-grid">
+                    <div class="goal-card" data-goal="goal2-1">
+                    <div class="goal-header">
+                        <div class="goal-number">8</div>
+                        <div class="goal-title">Three-Letter Speed Demon</div>
+                    </div>
+                    <div class="goal-description">
+                        Column speed demon - complete each column in 20 seconds or less!
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal2-1')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal2-2">
+                    <div class="goal-header">
+                        <div class="goal-number">9</div>
+                        <div class="goal-title">Precision Master</div>
+                    </div>
+                    <div class="goal-description">
+                        Single column precision - Random mode, 1 second timer, Flash mode, 20 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal2-2')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal2-3">
+                    <div class="goal-header">
+                        <div class="goal-number">10</div>
+                        <div class="goal-title">Double Excellence</div>
+                    </div>
+                    <div class="goal-description">
+                        Double column excellence - 2 columns, Random mode, 1 second timer, Flash mode, 20 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal2-3')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal2-4">
+                    <div class="goal-header">
+                        <div class="goal-number">11</div>
+                        <div class="goal-title">Triple Supremacy</div>
+                    </div>
+                    <div class="goal-description">
+                        Triple column supremacy - 3 columns, Random mode, 1 second timer, Flash mode, 20 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal2-4')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal2-5">
+                    <div class="goal-header">
+                        <div class="goal-number">12</div>
+                        <div class="goal-title">Quad Mastery</div>
+                    </div>
+                    <div class="goal-description">
+                        Quad column mastery - 4 columns, Random mode, 1 second timer, Flash mode, 20 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal2-5')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal2-6">
+                    <div class="goal-header">
+                        <div class="goal-number">13</div>
+                        <div class="goal-title">Five Column Dominator</div>
+                    </div>
+                    <div class="goal-description">
+                        Five column domination - 5 columns, Random mode, 1 second timer, Flash mode, 20 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal2-6')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal2-7">
+                    <div class="goal-header">
+                        <div class="goal-number">14</div>
+                        <div class="goal-title">Three-Letter LEGEND</div>
+                    </div>
+                    <div class="goal-description">
+                        LEGENDARY FEAT - Entire Three-Letter Chart, Random mode, 1 second timer, Flash mode, 30 in a row, no mistakes.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal2-7')">Mark Complete</button>
+                </div>
+                </div>
+            </div>
+
+            <!-- Level 3 Section -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">3</div>
+                    <div class="level-title">Word Workbook Adventure</div>
+                </div>
+                <div class="goals-grid">
+                    <div class="goal-card" data-goal="goal3-1">
+                    <div class="goal-header">
+                        <div class="goal-number">15</div>
+                        <div class="goal-title">One-Syllable Champion</div>
+                    </div>
+                    <div class="goal-description">
+                        One-Syllable Champion - Read all the words in the columns, correctly, without phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal3-1')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal3-2">
+                    <div class="goal-header">
+                        <div class="goal-number">16</div>
+                        <div class="goal-title">Two-Syllable Hero</div>
+                    </div>
+                    <div class="goal-description">
+                        Two-Syllable Hero - Read all the words in the columns, correctly, without phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal3-2')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal3-3">
+                    <div class="goal-header">
+                        <div class="goal-number">17</div>
+                        <div class="goal-title">Three-Syllable Star</div>
+                    </div>
+                    <div class="goal-description">
+                        Three-Syllable Star - Read all the words in the columns, correctly, without phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal3-3')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal3-4">
+                    <div class="goal-header">
+                        <div class="goal-number">18</div>
+                        <div class="goal-title">Four-Syllable Legend</div>
+                    </div>
+                    <div class="goal-description">
+                        Four-Syllable Legend - Read all the words in the columns, correctly, without phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal3-4')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal3-5">
+                    <div class="goal-header">
+                        <div class="goal-number">19</div>
+                        <div class="goal-title">Five-Syllable MASTER</div>
+                    </div>
+                    <div class="goal-description">
+                        ULTIMATE WORD MASTER - Read all the words in the columns, correctly, without phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal3-5')">Mark Complete</button>
+                </div>
+                </div>
+            </div>
+
+            <!-- Level 4 Section -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">4</div>
+                    <div class="level-title">Sentence Workbook Quest</div>
+                </div>
+                <div class="goals-grid">
+                    <div class="goal-card" data-goal="goal4-1">
+                    <div class="goal-header">
+                        <div class="goal-number">20</div>
+                        <div class="goal-title">Sentence Foundation Master</div>
+                    </div>
+                    <div class="goal-description">
+                        One-Syllable Sentence Master - Read each page correctly with no phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal4-1')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal4-2">
+                    <div class="goal-header">
+                        <div class="goal-number">21</div>
+                        <div class="goal-title">Advanced Sentence Champion</div>
+                    </div>
+                    <div class="goal-description">
+                        Two-Syllable Sentence Champion - Read each page correctly with no phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal4-2')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal4-3">
+                    <div class="goal-header">
+                        <div class="goal-number">22</div>
+                        <div class="goal-title">Complex Sentence Hero</div>
+                    </div>
+                    <div class="goal-description">
+                        Three-Syllable Sentence Hero - Read each page correctly with no phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal4-3')">Mark Complete</button>
+                </div>
+
+                <div class="goal-card" data-goal="goal4-4">
+                    <div class="goal-header">
+                        <div class="goal-number">23</div>
+                        <div class="goal-title">Four-Syllable Sentence Master</div>
+                    </div>
+                    <div class="goal-description">
+                        Four-Syllable Sentence Master - Read each page correctly with no phonetic help.
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal4-4')">Mark Complete</button>
+                </div>
+                </div>
+            </div>
+
+            <!-- Level 5 Section -->
+            <div class="level-section">
+                <div class="level-header">
+                    <div class="level-number">5</div>
+                    <div class="level-title">Word Wall Sight Words Ultimate Challenge</div>
+                </div>
+                <div class="goals-grid">
+                    <div class="goal-card" data-goal="goal5-1">
+                    <div class="goal-header">
+                        <div class="goal-number">24</div>
+                        <div class="goal-title">Sight Word LEGEND</div>
+                    </div>
+                    <div class="goal-description">
+                        LEGENDARY CHALLENGE - 30 sight words in a row, Random, Timer 1 second, Flash mode, and no mistakes. Create your own winning system to learn the sight words!
+                    </div>
+                    <button class="goal-button" onclick="toggleGoal('goal5-1')">Mark Complete</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // Load saved progress
+        let goalProgress = JSON.parse(localStorage.getItem('pinnacleReadingProgress') || '{}');
+
+        // Initialize page
+        function initializePage() {
+            Object.keys(goalProgress).forEach(goalId => {
+                if (goalProgress[goalId]) {
+                    const card = document.querySelector(`[data-goal="${goalId}"]`);
+                    const button = card.querySelector('.goal-button');
+                    
+                    card.classList.add('completed');
+                    button.textContent = '✅ Completed';
+                    button.classList.add('completed');
+                }
+            });
+            updateProgress();
+        }
+
+        // Toggle goal completion
+        function toggleGoal(goalId) {
+            const card = document.querySelector(`[data-goal="${goalId}"]`);
+            const button = card.querySelector('.goal-button');
+            
+            if (goalProgress[goalId]) {
+                // Mark as incomplete
+                goalProgress[goalId] = false;
+                card.classList.remove('completed');
+                button.textContent = 'Mark Complete';
+                button.classList.remove('completed');
+            } else {
+                // Mark as complete
+                goalProgress[goalId] = true;
+                card.classList.add('completed');
+                button.textContent = '✅ Completed';
+                button.classList.add('completed');
+            }
+            
+            // Save progress
+            localStorage.setItem('pinnacleReadingProgress', JSON.stringify(goalProgress));
+            updateProgress();
+        }
+
+        // Level goal counts
+        const levelGoalCounts = {
+            1: 7, // Two-Letter Chart Challenge
+            2: 7, // Three-Letter Chart Adventure
+            3: 5, // Word Workbook Adventure
+            4: 4, // Sentence Workbook Quest
+            5: 1  // Word Wall Ultimate Challenge
+        };
+
+        // Update progress display
+        function updateProgress() {
+            const totalGoals = 24;
+            const completedGoals = Object.values(goalProgress).filter(completed => completed).length;
+            const progressPercent = Math.round((completedGoals / totalGoals) * 100);
+            
+            // Update overall progress
+            document.getElementById('completed-count').textContent = completedGoals;
+            document.getElementById('progress-percent').textContent = progressPercent + '%';
+            
+            // Update individual level progress
+            for (let level = 1; level <= 5; level++) {
+                const levelGoals = levelGoalCounts[level];
+                const completedLevelGoals = Object.keys(goalProgress)
+                    .filter(key => key.startsWith(`goal${level}-`) && goalProgress[key])
+                    .length;
+                const levelPercent = Math.round((completedLevelGoals / levelGoals) * 100);
+                
+                const progressBar = document.getElementById(`level${level}-bar`);
+                const progressPercent = document.getElementById(`level${level}-percent`);
+                const progressItem = progressBar.closest('.level-progress-item');
+                
+                if (progressBar && progressPercent) {
+                    progressBar.style.width = levelPercent + '%';
+                    progressPercent.textContent = levelPercent + '%';
+                    
+                    // Add completed class if level is 100% done
+                    if (levelPercent === 100) {
+                        progressItem.classList.add('completed');
+                    } else {
+                        progressItem.classList.remove('completed');
+                    }
+                }
+            }
+            
+            // Show completion badge if all goals are done
+            const badge = document.getElementById('completion-badge');
+            if (completedGoals === totalGoals) {
+                badge.classList.add('show');
+            } else {
+                badge.classList.remove('show');
+            }
+        }
+
+        // Initialize when page loads
+        initializePage();
+    </script>
+</body>
+</html>
