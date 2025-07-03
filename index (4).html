@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<!-- 
+A/B Testing URLs:
+- Gentle Version (Default): pinnaclereadingadvantage.com
+- Aggressive Version: pinnaclereadingadvantage.com?version=aggressive
+
+Google Analytics tracks both versions separately for conversion analysis.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Reading Advantage - Transform Reading Skills in Just 30 Days</title>
+    <meta name="description" content="Breakthrough reading system that transforms struggling students into confident readers by mastering 480 essential letter blends. Students instantly recall each blend in under half a second, giving them the power to decode any word they encounter.">
+    
+    <!-- Stripe Payment Processing -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <!-- Google Analytics with A/B Testing -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0CF0ZYGCNV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Detect A/B test version from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const version = urlParams.get('version') || 'gentle';
+        
+        gtag('config', 'G-0CF0ZYGCNV', {
+            custom_map: {'custom_parameter_1': 'ab_test_version'}
+        });
+        
+        // Track A/B test version immediately
+        gtag('event', 'page_view_ab_test', {
+            'custom_parameter_1': version,
+            'event_category': 'AB_Testing',
+            'event_label': version
+        });
+        
+        // Enhanced tracking functions
+        function trackCTAClick(buttonText, version) {
+            gtag('event', 'cta_click', {
+                'event_category': 'Conversion',
+                'event_label': buttonText,
+                'custom_parameter_1': version
+            });
+        }
+        
+        function trackTrialStart(version) {
+            gtag('event', 'trial_start', {
+                'event_category': 'Conversion',
+                'event_label': 'Free Trial Started',
+                'custom_parameter_1': version,
+                'value': 1
+            });
+        }
+        
+        function trackSectionView(sectionName, version) {
+            gtag('event', 'section_view', {
+                'event_category': 'Engagement',
+                'event_label': sectionName,
+                'custom_parameter_1': version
+            });
+        }
+        
+        // Store version globally for use throughout page
+        window.abTestVersion = version;
+    </script>
+    
+    <style>
+        :root {
+            --primary-purple: #4b0082;
+            --primary-green: #1a7531;
+            --accent-orange: #ff6b35;
+            --success-green: #28a745;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --gradient-primary: linear-gradient(135deg, #4b0082, #6a1b9a);
+            --gradient-success: linear-gradient(135deg, #28a745, #20c997);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        @keyframes slideRight {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffd700;
+            display: block;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .cta-primary {
+            background: var(--gradient-success);
+            color: var(--white);
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: var(--shadow-medium);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .money-back {
+            font-size: 0.9rem;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            padding: 80px 0;
+            background: var(--light-bg);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .testimonial {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            border-left: 5px solid var(--success-green);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #ffebee, #f8bbd9);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid #e91e63;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid var(--success-green);
+        }
+
+        .box-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .problem-box .box-title {
+            color: #c2185b;
+        }
+
+        .solution-box .box-title {
+            color: var(--primary-green);
+        }
+
+        .problem-list, .solution-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-list li {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .problem-list li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #e91e63;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .solution-list li {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .solution-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Programs Overview */
+        .programs-overview {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .program-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--primary-purple);
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .program-number {
+            background: var(--gradient-primary);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .program-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-purple);
+            margin-bottom: 15px;
+        }
+
+        .program-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border: 3px solid var(--primary-purple);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+        }
+
+        .pricing-badge {
+            background: var(--gradient-success);
+            color: var(--white);
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .price {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-purple);
+            margin: 20px 0;
+        }
+
+        .price-period {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: var(--primary-purple);
+            color: var(--white);
+            padding: 20px 30px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .faq-question::after {
+            content: "+";
+            position: absolute;
+            right: 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            padding: 25px 30px;
+            display: none;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: "−";
+        }
+
+        /* Demo Section */
+        .demo-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .demo-progression {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .demo-step {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            border: 2px solid var(--primary-purple);
+            transition: all 0.3s ease;
+        }
+
+        .demo-step:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .demo-number {
+            background: var(--gradient-primary);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+        }
+
+        .demo-step h3 {
+            color: var(--primary-purple);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .demo-example {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .demo-arrow {
+            font-size: 2rem;
+            color: var(--primary-purple);
+            font-weight: bold;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            padding: 80px 0;
+            background: var(--gradient-primary);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .footer-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-progression {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .demo-arrow {
+                transform: rotate(90deg);
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+        /* Navigation Header */
+        .nav-header {
+            background: rgba(75, 0, 130, 0.95);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .nav-logo {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .nav-button {
+            background: #ff6b35;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+    </style>
+    
+    <!-- Stripe JavaScript -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+        <div class="nav-container">
+            <div class="nav-logo">Pinnacle Reading Advantage</div>
+            <a href="student-dashboard.html" class="nav-button">Access Programs</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Pinnacle Reading Advantage</h1>
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 700;">From Reading Struggles to Reading Break-Through in 30 Days</h2>
+                <p class="hero-subtitle">
+                    Revolutionary reading system that cleverly teaches students 480 letter blends. As an added bonus, they're able to access each blend in less than a half a second! They use these patterns to decode each and every word they see.<br>Words Have No Where to Hide!
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">480</span>
+                        <span class="stat-label">Phonetic Syllables Mastered<br>Each syllable accessible in less than a half second!</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24</span>
+                        <span class="stat-label">Progressive Skill Challenges</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Complete Interactive Programs<br>with user guides</span>
+                    </div>
+                </div>
+
+                <a href="#" onclick="startSubscription()" class="cta-primary">Start FREE 7-Day Trial - Then $9.99/Month</a>
+                <a href="#demo" class="cta-primary" style="background: rgba(255,255,255,0.2); border: 2px solid white;">See Live Demo</a>
+                
+                <p class="money-back">✓ 7-Day FREE Trial ✓ No Credit Card Required ✓ Cancel Anytime ✓ Works for Ages 5 to Adult</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 80px 0;">
+        <div class="container">
+            <div style="background: linear-gradient(135deg, #fff, #f8f9ff); border-radius: 20px; padding: 50px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 3px solid var(--primary-purple); position: relative; overflow: hidden;">
+                
+                <!-- Decorative background element -->
+                <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(75,0,130,0.1), transparent); border-radius: 50%;"></div>
+                
+                <!-- Main Content -->
+                <div style="position: relative; z-index: 1;">
+                    <div style="text-align: center; margin-bottom: 50px;">
+                        <h2 style="font-size: 3rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 20px; line-height: 1.2;">
+                            The Shocking Truth: What Your Child's Struggles Really Mean
+                        </h2>
+                        <div style="width: 100px; height: 4px; background: var(--gradient-primary); margin: 0 auto; border-radius: 2px;"></div>
+                    </div>
+
+                    <!-- Before/After Comparison -->
+                    <div style="background: linear-gradient(135deg, #f8f9ff, #fff8f0); border-radius: 20px; padding: 50px 40px; margin-bottom: 50px; box-shadow: 0 20px 40px rgba(75,0,130,0.1);">
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <h3 style="font-size: 2.2rem; font-weight: 700; color: var(--primary-purple); margin-bottom: 15px;">
+                                Same Child. Different Approach. Shocking Results.
+                            </h3>
+                            <p style="font-size: 1.3rem; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+                                Watch what happens when we address the <strong>real problem</strong> instead of dancing around it
+                            </p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch;">
+                            
+                            <!-- BEFORE Side -->
+                            <div style="background: linear-gradient(135deg, #ffeaea, #fff0f0); padding: 40px; border-radius: 15px; border: 3px solid #ff4444; position: relative; overflow: hidden;">
+                                <!-- Diagonal "BEFORE" ribbon -->
+                                <div style="position: absolute; top: 20px; left: -35px; background: #ff4444; color: white; padding: 8px 50px; transform: rotate(-45deg); font-weight: bold; font-size: 0.9rem; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                                    BEFORE PRA
+                                </div>
+                                
+                                <h4 style="font-size: 1.6rem; font-weight: 700; color: #cc0000; margin: 40px 0 30px 0; text-align: center;">
+                                    Traditional Reading Programs
+                                </h4>
+                                
+                                <div style="text-align: center; margin-bottom: 30px;">
+                                    <div style="font-size: 3rem; font-weight: 800; color: #ff4444; margin-bottom: 10px;">😰</div>
+                                    <div style="font-size: 1.3rem; font-weight: 600; color: #cc0000;">Your Child's Reality</div>
+                                </div>
+
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li style="margin: 20px 0; padding: 15px; background: rgba(255,68,68,0.1); border-radius: 10px; position: relative;">
+                                        <span style="font-size: 1.2rem; color: #ff4444; margin-right: 10px;">😔</span>
+                                        <strong style="color: #cc0000;">Frustrated and falling behind</strong> - spending hours on homework that should take minutes
+                                    </li>
+                                    <li style="margin: 20px 0; padding: 15px; background: rgba(255,68,68,0.1); border-radius: 10px; position: relative;">
+                                        <span style="font-size: 1.2rem; color: #ff4444; margin-right: 10px;">🐌</span>
+                                        <strong style="color: #cc0000;">Painfully slow reading</strong> - sounding out every word letter by letter
+                                    </li>
+                                    <li style="margin: 20px 0; padding: 15px; background: rgba(255,68,68,0.1); border-radius: 10px; position: relative;">
+                                        <span style="font-size: 1.2rem; color: #ff4444; margin-right: 10px;">🤯</span>
+                                        <strong style="color: #cc0000;">Overwhelmed by big words</strong> - avoiding challenging books and losing confidence daily
+                                    </li>
+                                    <li style="margin: 20px 0; padding: 15px; background: rgba(255,68,68,0.1); border-radius: 10px; position: relative;">
+                                        <span style="font-size: 1.2rem; color: #ff4444; margin-right: 10px;">💔</span>
+                                        <strong style="color: #cc0000;">"I'm not smart enough"</strong> - the heartbreaking words no parent should ever hear
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- AFTER Side -->
+                            <div style="background: linear-gradient(135deg, #eaffea, #f0fff0); padding: 40px; border-radius: 15px; border: 3px solid #22cc22; position: relative; overflow: hidden;">
+                                <!-- Diagonal "AFTER" ribbon -->
+                                <div style="position: absolute; top: 20px; left: -35px; background: #22cc22; color: white; padding: 8px 50px; transform: rotate(-45deg); font-weight: bold; font-size: 0.9rem; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                                    AFTER PRA
+                                </div>
+                                
+                                <h4 style="font-size: 1.6rem; font-weight: 700; color: #008800; margin: 40px 0 30px 0; text-align: center;">
+                                    Pinnacle Reading Advantage
+                                </h4>
+                                
+                                <div style="text-align: center; margin-bottom: 30px;">
+                                    <div style="font-size: 3rem; font-weight: 800; color: #22cc22; margin-bottom: 10px;">🌟</div>
+                                    <div style="font-size: 1.3rem; font-weight: 600; color: #008800;">Your Child Transformed</div>
+                                </div>
+
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li style="margin: 20px 0; padding: 15px; background: rgba(34,204,34,0.1); border-radius: 10px; position: relative;">
+                                        <span style="font-size: 1.2rem; color: #22cc22; margin-right: 10px;">🚀</span>
+                                        <strong style="color: #008800;">Reading rocket ship</strong> - blazing through books that once seemed impossible
+                                    </li>
+                                    <li style="margin: 20px 0; padding: 15px; background: rgba(34,204,34,0.1); border-radius: 10px; position: relative;">
+                                        <span style="font-size: 1.2rem; color: #22cc22; margin-right: 10px;">⚡</span>
+                                        <strong style="color: #008800;">Lightning-fast word attack</strong> - 480 blends mastered for instant recognition
+                                    </li>
+                                    <li style="margin: 20px 0; padding: 15px; background: rgba(34,204,34,0.1); border-radius: 10px; position: relative;">
+                                        <span style="font-size: 1.2rem; color: #22cc22; margin-right: 10px;">💪</span>
+                                        <strong style="color: #008800;">Tackling any word fearlessly</strong> - multi-syllable monsters become easy targets
+                                    </li>
+                                    <li style="margin: 20px 0; padding: 15px; background: rgba(34,204,34,0.1); border-radius: 10px; position: relative;">
+                                        <span style="font-size: 1.2rem; color: #22cc22; margin-right: 10px;">🏆</span>
+                                        <strong style="color: #008800;">"I'm a reading champion!"</strong> - the confidence boost that changes everything
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Impact Statement -->
+                        <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #ff8c00, #ffa500); border-radius: 15px; color: white;">
+                            <h4 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; color: #ffd700;">
+                                The Difference? We Fix the Foundation First.
+                            </h4>
+                            <p style="font-size: 1.3rem; line-height: 1.6; margin: 0; max-width: 800px; margin: 0 auto;">
+                                While other programs waste time on comprehension exercises your child can't use, we build the <strong style="color: #ffd700;">lightning-fast word reading skills</strong> that make everything else possible.
+                            </p>
+                        </div>
+                    </div>
+                    </div>
+
+                    <!-- Bottom CTA -->
+                    <div style="text-align: center; background: var(--gradient-primary); color: white; padding: 40px; border-radius: 15px; box-shadow: 0 15px 30px rgba(75,0,130,0.2);">
+                        <div style="text-align: left; max-width: 900px; margin: 0 auto;">
+                            <h3 style="font-size: 1.8rem; margin-bottom: 25px; line-height: 1.4; font-weight: 700; color: #ffd700;">
+                                The Hidden Truth About Why Most Reading Programs Fail
+                            </h3>
+                            <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.7;">
+                                Countless online reading programs promise to help your child identify main ideas, remember key details, and boost comprehension. They showcase impressive strategies and engaging activities. But here's what they won't tell you: most students can't even read half the words on the page.
+                            </p>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 15px; line-height: 1.4; font-weight: 600; color: #ffd700;">
+                                The Real Problem Behind Poor Reading Comprehension
+                            </h4>
+                            <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.7;">
+                                When children struggle with comprehension, the issue isn't their thinking skills or attention span. The problem is far simpler and more fundamental: they can't decode the words in front of them.
+                            </p>
+                            <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.7;">
+                                You can't identify the main idea of a passage when you're stuck sounding out every third word. You can't remember key details when all your mental energy goes toward figuring out what the letters say. Poor comprehension isn't a comprehension problem—it's a <strong style="color: #ffd700;">word reading problem</strong>.
+                            </p>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 15px; line-height: 1.4; font-weight: 600; color: #ffd700;">
+                                Why Traditional Approaches Fall Short
+                            </h4>
+                            <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.7;">
+                                Most reading programs avoid this uncomfortable truth because they don't know how to solve it. Teaching actual word reading skills—especially for multi-syllable words—requires systematic expertise that most programs simply don't possess.
+                            </p>
+                            <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.7;">
+                                The sobering reality? <strong style="color: #ffd700;">Sixty-five percent of fourth-grade students can't read at grade level.</strong> Not because they lack intelligence or motivation, but because no one taught them the foundational skill that makes everything else possible: how to read words fluently and automatically.
+                            </p>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 15px; line-height: 1.4; font-weight: 600; color: #ffd700;">
+                                The Game-Changing Solution
+                            </h4>
+                            <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.7;">
+                                Pinnacle Reading Advantage takes a revolutionary approach by teaching what actually matters: letter blend mastery. Students learn 480 essential two-letter and three-letter blends so thoroughly they can access each one in under half a second.
+                            </p>
+                            <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.7;">
+                                This isn't just faster phonics—it's a completely different way of seeing words. Instead of laboriously sounding out letter by letter, students attack words using powerful blend patterns. Whether facing one-syllable or six-syllable words, they have the tools they need.
+                            </p>
+                            <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.7;">
+                                <strong style="color: #ffd700;">Words Have No Where to Hide!</strong>
+                            </p>
+                        </div>
+                        <a href="#" onclick="enhancedStartSubscription()" style="background: var(--gradient-success); color: white; padding: 20px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transition: all 0.3s ease; margin-top: 20px; display: inline-block;">
+                            See Why Parents Call PRA Their "Reading Savior"
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof">
+        <div class="container">
+
+            
+            <!-- Featured Testimonial -->
+            <div style="background: linear-gradient(135deg, #f8f9ff, #f0f2ff); border: 3px solid var(--primary-purple); border-radius: 20px; padding: 40px; margin-bottom: 50px; box-shadow: var(--shadow-medium);">
+                <div style="color: var(--primary-purple); font-weight: bold; font-size: 1.1rem; margin-bottom: 20px;">
+                    From Skeptical Director to True Believer
+                </div>
+                
+                <blockquote style="font-style: italic; font-size: 1.4rem; line-height: 1.6; color: var(--text-dark); margin-bottom: 25px; border-left: 5px solid var(--primary-green); padding-left: 20px;">
+                    "I was skeptical when our teacher told me about this reading program - it didn't seem possible to have kindergarteners progress from not knowing the alphabet to reading multi-syllable words in such a short time. Three months later, it's amazing to see the results. I have to admit it's kind of fun to hear a 5-year-old say 'diabolical.'"
+                </blockquote>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                    <div>
+                        <div style="font-weight: bold; color: var(--primary-purple); font-size: 1.1rem;">Kathryn Kelly</div>
+                        <div style="color: var(--text-light);">Educational Director, iSchools.us</div>
+
+                    </div>
+                    <div style="background: var(--gradient-success); color: white; padding: 15px 25px; border-radius: 25px; text-align: center;">
+                        <div style="font-weight: bold; font-size: 1rem;">Results Timeline:</div>
+                        <div style="font-size: 1.2rem; font-weight: bold;">Alphabet → Multi-syllable Words</div>
+                        <div style="font-size: 0.9rem;">in just 3 months</div>
+                    </div>
+                </div>
+                
+                <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 20px; margin-top: 25px;">
+                    <div style="color: #856404; font-weight: bold; margin-bottom: 10px;">🎥 VIDEO PROOF AVAILABLE:</div>
+                    <div style="color: #856404;">Watch actual kindergarteners reading words like "diabolical," "insurmountable," and "insignificant" on YouTube. Real students, real results, real transformation.</div>
+                </div>
+            </div>
+            
+            <!-- Testimonials Section Header -->
+            <div style="text-align: center; margin: 60px 0 40px 0;">
+                <h2 style="font-size: 3rem; font-weight: bold; color: #1a4d3a; margin-bottom: 15px; font-family: Georgia, serif;">
+                    Listen to What Our Amazing Families Are Saying
+                </h2>
+                <p style="font-size: 1.3rem; color: #555; font-weight: 500; max-width: 600px; margin: 0 auto;">
+                    Real parents, teachers, and students sharing their incredible reading transformation stories
+                </p>
+            </div>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "My daughter was recently tested in the second grade on basic sight words as well as other common words. I found out that she did very poorly on the assessment, even on two letter words. This was very upsetting. I did not know if the school was to blame or if she had some kind of learning issues. I decided to try PRA after a friend told me about the program. It was exactly what she needed. It gave her the exact practice she needed, which is letter blending skills. Well, the transformation was quick and dramatic. I found out that she does not have any learning issues, the school just doesn't teach these skills. She picked up on the Decoding Blends Charts like nobody's business. She was very anxious to learn and now she knew she had the system to finally teach her the right way. The great thing about the program is that it is very self-directed. She knows exactly what columns to choose and all the settings in the Practice mode. She completed the Two-Letter Chart, in Flash mode, which was amazing to watch, and she will soon be completing the Three-Letter chart. She even sounds out words as we read together in the evening. Two letter words are no longer an issue! She loves PRA and so do I!"
+                    </p>
+                    <div class="testimonial-author">Sarah Brently</div>
+                    <div class="testimonial-role">Parent</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "I am an ESL teacher who teaches mainly to a hispanic population. The students I teach have only made modest gains with the curriculum I've been using. I was recently told about PRA and my students have responded wonderfully! What they all needed most of all was letter blending skills and the Two-Letter and Three-letter charts have been a game changer. The high repetition seems to be the key that has allowed them finally to grasp the concept of how letters actually blend together. The fact that each practice session allows them to practice ALL the vowel sounds and ALL the consonant sounds makes such a huge difference. The progress they are making is truly remarkable!"
+                    </p>
+                    <div class="testimonial-author">Amy Cervantes</div>
+                    <div class="testimonial-role">ESL Teacher</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "I am a homeschool mother of three and I also teach a friend of mine's child. I have one in kindergarten, two in the first grade and one in third grade. The reading program I use was the one I taught my third grader and am still using today. However, a homeschool friend convinced me to try Pinnacle Reading Advantage and I am so glad I did. The progress the two first graders and even my k student has made has been remarkable. So much easier, so much more user friendly, and far superior in terms of results than my previous method was able to obtain. The first graders are now reading three syllable words and my k will be completing the Three-Letter chart very soon, in Flash mode! It is such an intelligent way to teach reading!"
+                    </p>
+                    <div class="testimonial-author">Crystal Puglise</div>
+                    <div class="testimonial-role">Homeschool Mother</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Having my daughter learn the syllables on the Two-Letter chart and working her way into the Practice module was incredible. However, when she was able to say them in Flash mode, I was stunned! She can even do them in Ultra Flash! She wanted to practice in the morning…and the afternoon…and the evening! I couldn't keep her off it. We love to see her click 'Skill Completed' on the Challenge page!"
+                    </p>
+                    <div class="testimonial-author">Rosemary Lund</div>
+                    <div class="testimonial-role">Parent, Michigan</div>
+                </div>
+                
+                <!-- Combined Short Testimonials -->
+                <div class="testimonial">
+                    <div style="border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px;">
+                        <p class="testimonial-text">
+                            "It's a miracle. I got my boy off of video games with a learning to read program. Unbelievable! Pinch me!"
+                        </p>
+                        <div class="testimonial-author">Cindy Langdon</div>
+                        <div class="testimonial-role">Parent, Texas</div>
+                    </div>
+                    <div style="border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px;">
+                        <p class="testimonial-text">
+                            "Our kindergarten granddaughter just finished Pinnacle Reading Advantage and the first book she read was a fourth grade level vampire book!"
+                        </p>
+                        <div class="testimonial-author">Denise Padilla</div>
+                        <div class="testimonial-role">Grandparent, Arizona</div>
+                    </div>
+                    <div>
+                        <p class="testimonial-text">
+                            "I sit with my daughter and read every evening. She is so excited when she can read a really long word! She has come so far with the Pinnacle system."
+                        </p>
+                        <div class="testimonial-author">Jennifer Goldstein</div>
+                        <div class="testimonial-role">Parent, New York</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "My son has had a very difficult time learning to read. At his school, he gets pulled into the resource room to get the extra practice he needs. Honestly, I have not seen much progress. However, with the PRA program, he is getting the focused practice he was not getting at school. He just needed the extra repetition that is not possible with other methods. Now, he is actually getting the blends faster and faster and soon he will be in Flash mode. He is even starting to read words to me! I am so happy for him! This is an outstanding program."
+                    </p>
+                    <div class="testimonial-author">Deborah Poole</div>
+                    <div class="testimonial-role">Parent, Oregon</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "I am an ESL instructor at an adult school in my community. Most of the people who attend are students from Afghanistan. The Farsi language is so different from English in so many ways. The symbols are different, they read from right to left and the sentence syntax is quite different. It was very difficult to make progress. We now use Pinnacle Reading Advantage and it has made a world of difference! They are now getting the much needed repetition at blending English letters. They can spend all the time they need in Practice mode to increase their speed and recall. This has been such a game-changer. Many of our students are now reading words on their own. They are so proud of themselves and very excited! I love PRA!"
+                    </p>
+                    <div class="testimonial-author">Fareiba Noor</div>
+                    <div class="testimonial-role">ESL Instructor, Community College</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "I've started using Pinnacle Reading Advantage in my classroom just recently. A colleague told me about the program. Like a lot of my fellow third grade teachers, many of our students don't read at grade level. I teach in what would be described as a working class neighborhood with a large hispanic population. As you might imagine, language barriers do affect the overall learning in my class. However, I have been absolutely blown away by the effectiveness of PRA. It does not matter what nationality you are or the language that you speak, PRA gives the students exactly what they need, specific practice on letter blending. I also use the Word Wall for vocabulary development, sight words, and spelling words. I have my class compete at who can get words or letter blends in the Practice section. They are so excited to get words in the Flash mode and it is bragging rights time if they get a word in Ultra Flash mode! The kids love the drills we go through and are getting exactly the practice they need at blending letters. I've been teaching for 15 years and I have never seen results like this! PRA is wonderful!"
+                    </p>
+                    <div class="testimonial-author">David Siegal</div>
+                    <div class="testimonial-role">Third Grade Teacher</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <div style="background: var(--gradient-success); color: white; padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <h3 style="margin-bottom: 15px; font-size: 1.5rem;">Join 10,000+ Families Worldwide</h3>
+                    <p style="font-size: 1.1rem; margin: 0;">Who have discovered the power of systematic phonetic reading instruction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Opportunity Section -->
+    <section class="market-opportunity" style="padding: 80px 0; background: linear-gradient(135deg, #f8f9ff, #f0f2ff);">
+        <div class="container">
+            <h2 class="section-title">The Solution for 1.5 Billion English Learners Worldwide</h2>
+            <p style="text-align: center; font-size: 1.4rem; color: #666; margin-bottom: 50px; font-weight: bold;">
+                The only systematic phonetic reading system that works for every learning environment
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow-light); border-top: 5px solid #4b0082;">
+                    <h3 style="color: #4b0082; margin-bottom: 15px; font-size: 1.3rem;">🏫 Schools & Districts</h3>
+                    <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Transform struggling readers into confident learners. Where traditional methods fail, PRA delivers measurable results in months, not years.</p>
+                </div>
+                
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow-light); border-top: 5px solid #1a7531;">
+                    <h3 style="color: #1a7531; margin-bottom: 15px; font-size: 1.3rem;">🏠 Homeschool Families</h3>
+                    <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Give your children the reading advantage that surpasses traditional classroom instruction. Systematic, proven, and parent-friendly.</p>
+                </div>
+                
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow-light); border-top: 5px solid #ff6b35;">
+                    <h3 style="color: #ff6b35; margin-bottom: 15px; font-size: 1.3rem;">🌍 ESL Communities</h3>
+                    <p style="color: #666; line-height: 1.6;">Breakthrough language barriers with systematic phonetic instruction. Multilingual support included for global learners.</p>
+                </div>
+                
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow-light); border-top: 5px solid #6f42c1;">
+                    <h3 style="color: #6f42c1; margin-bottom: 15px; font-size: 1.3rem;">📚 Adult Education</h3>
+                    <p style="color: #666; line-height: 1.6;">Never too late to master reading. Effective for adult learners, correctional facilities, and literacy programs worldwide.</p>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 40px; border-radius: 20px; text-align: center;">
+                <h3 style="font-size: 2rem; margin-bottom: 20px;">The Global Reading Crisis Needs a Solution</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px;">
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #ffd700;">1.5B</div>
+                        <div>English Learners Worldwide</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #ffd700;">65%</div>
+                        <div>US Students Below Proficiency</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #ffd700;">100%</div>
+                        <div>Success Rate with PRA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution">
+        <div class="container">
+            <div class="two-column">
+                <div class="problem-box">
+                    <h3 class="box-title">Why Traditional Methods Fail Globally...</h3>
+                    <ul class="problem-list">
+                        <li>Students guess at words instead of decoding them</li>
+                        <li>Sight word memorization creates reading ceilings</li>
+                        <li>Letter-by-letter sounding creates slow, choppy reading</li>
+                        <li>No systematic progression from simple to complex</li>
+                        <li>Students plateau and lose confidence</li>
+                        <li>Teachers lack proven phonetic training tools</li>
+                    </ul>
+                </div>
+                
+                <div class="solution-box">
+                    <h3 class="box-title">PRA Works for Every Learning Environment...</h3>
+                    <ul class="solution-list">
+                        <li>480 syllable combinations, each blend accessible to the student in under a half second</li>
+                        <li>Systematic progression from blends to single words to sentences</li>
+                        <li>Interactive tools with immediate feedback</li>
+                        <li>Proven methodology used by thousands worldwide</li>
+                        <li>Works for all ages - kindergarten to adult</li>
+                        <li>Multilingual support for global communities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Overview -->
+    <section class="programs-overview" id="programs">
+        <div class="container">
+            <h2 class="section-title">Complete 5-Program Learning System with User Guides</h2>
+            <p style="text-align: center; font-size: 1.4rem; color: #666; max-width: 800px; margin: 0 auto; font-weight: bold;">
+                Complete learning system with user guides to assist you every step of the way.
+            </p>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-number">1</div>
+                    <h3 class="program-title">Decoding Blends Charts + User Guide</h3>
+                    <p class="program-description">
+                        Master 480 phonetic syllable combinations with interactive two-letter and three-letter charts. 
+                        Complete step-by-step instructions for teachers and parents included.
+                    </p>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-number">2</div>
+                    <h3 class="program-title">Comprehensive Word Workbook + User Guide</h3>
+                    <p class="program-description">
+                        3,000+ progressive vocabulary words with multilingual dictionary support. User-friendly instructions 
+                        connecting Decoding Blends Charts to multi-syllabic word reading.
+                    </p>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-number">3</div>
+                    <h3 class="program-title">Comprehensive Sentence Workbook + User Guide</h3>
+                    <p class="program-description">
+                        Progressive sentence reading fluency development with systematic complexity increase. 
+                        Complete methodology for building sentence comprehension skills.
+                    </p>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-number">4</div>
+                    <h3 class="program-title">Dynamic Word Wall + User Guide</h3>
+                    <p class="program-description">
+                        Customizable practice system with grid configuration, word list management, and advanced practice modes. 
+                        Comprehensive feature utilization guide included.
+                    </p>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-number">5</div>
+                    <h3 class="program-title">Pinnacle Reading Advantage Challenge</h3>
+                    <p class="program-description">
+                        Interactive goal tracking and progress monitoring system with 24 progressive skill challenges. 
+                        Gamified learning experience to maintain motivation.
+                    </p>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PRA Simplicity and Power Section -->
+    <section style="padding: 80px 0; background: linear-gradient(135deg, #f0f8ff, #e6f3ff);">
+        <div class="container">
+            <h2 class="section-title" style="background: linear-gradient(135deg, #4b0082, #6a5acd, #8a2be2); color: white; padding: 40px; border-radius: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); box-shadow: 0 10px 30px rgba(75, 0, 130, 0.3); position: relative; overflow: hidden;">
+                <span style="position: relative; z-index: 2;">Pinnacle Reading Advantage<br><span style="font-size: 0.8em; opacity: 0.9;">The Power of Simplicity</span></span>
+                <div style="position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%); transform: rotate(45deg); animation: shimmer 3s infinite;"></div>
+            </h2>
+            <h3 style="text-align: center; font-size: 2rem; color: #4b0082; margin-bottom: 50px; font-weight: bold;">Its SuperPower is Repetition</h3>
+            
+            <div style="max-width: 900px; margin: 0 auto; background: white; padding: 50px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
+                <p style="font-size: 1.3rem; line-height: 1.7; color: #333; margin-bottom: 30px;">
+                    Most reading programs are weighed down with needlessly complex methods and procedures that don't lend themselves to easy practice. That's why they don't move the needle quickly or effectively. <strong>PRA prides itself on the most straightforward techniques available.</strong>
+                </p>
+                
+                <p style="font-size: 1.3rem; line-height: 1.7; color: #333; margin-bottom: 30px;">
+                    Each drill takes a single paragraph to describe. All five programs rely on the same fundamental principle: <strong style="color: #4b0082;">simple always outperforms needless complexity.</strong>
+                </p>
+                
+                <div style="background: linear-gradient(135deg, #4b0082, #6a5acd); color: white; padding: 30px; border-radius: 15px; margin: 40px 0;">
+                    <h4 style="font-size: 1.5rem; margin-bottom: 20px; text-align: center;">The SuperPower: Built-in Repetition</h4>
+                    <p style="font-size: 1.2rem; line-height: 1.6; text-align: center;">
+                        Repetition is key to acquiring any skill - it develops speed and accuracy. When you have both speed and accuracy, you have true learning.
+                    </p>
+                </div>
+                
+                <p style="font-size: 1.3rem; line-height: 1.7; color: #333; margin-bottom: 20px;">
+                    <strong>Speed and accuracy are the standards of mastery</strong> throughout the entire PRA program, and the only way to achieve them is through repetition. If a student is moving quickly through an exercise but makes many mistakes, learning is not taking place. If they have a high accuracy rate but move too slowly, they still don't have the skill committed to memory. Fortunately, repetition is built into the program itself, so speed and accuracy are the only available outcomes.
+                </p>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 25px 40px; border-radius: 15px; display: inline-block; font-size: 1.4rem; font-weight: bold;">
+                        That's why PRA is so unusually effective - Words Have No Where to Hide!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Word Wall for Teachers Section -->
+    <section style="padding: 80px 0; background: linear-gradient(135deg, #fff8dc, #f5f5dc);">
+        <div class="container">
+            <h2 class="section-title" style="background: linear-gradient(135deg, #ff6b35, #ff8c42, #ffa726); color: white; padding: 40px; border-radius: 20px; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.4); box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4); position: relative; overflow: hidden; border: 3px solid rgba(255,255,255,0.2);">
+                <span style="position: relative; z-index: 2;"><span style="color: #ffd700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Interactive Word Wall</span><br><span style="font-size: 0.8em; opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); color: white;">A Teacher's Dream Come True</span></span>
+                <div style="position: absolute; top: 10px; right: 10px; width: 60px; height: 60px; background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); border-radius: 50%; animation: pulse 2s infinite;"></div>
+                <div style="position: absolute; bottom: 10px; left: 10px; width: 40px; height: 40px; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); border-radius: 50%; animation: pulse 2.5s infinite;"></div>
+                <div style="position: absolute; top: 50%; left: -10px; width: 20px; height: 80px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); animation: slideRight 4s infinite;"></div>
+            </h2>
+            <p style="text-align: center; font-size: 1.4rem; color: #666; margin-bottom: 50px; font-weight: bold;">
+                Transform static word lists into dynamic learning experiences
+            </p>
+            
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin-bottom: 40px;">
+                    <p style="font-size: 1.3rem; line-height: 1.7; color: #333; margin-bottom: 30px;">
+                        With teaching in our background and part of our DNA, we know teachers spend countless hours managing lists: spelling lists, vocabulary lists, word wall lists, sight word lists, and more. Until now, they were static and uninteresting classroom fixtures that didn't easily support learning or interaction.
+                    </p>
+                    
+                    <p style="font-size: 1.3rem; line-height: 1.7; color: #333; margin-bottom: 30px; font-weight: bold; color: #4b0082;">
+                        That all changes with the Interactive Word Wall.
+                    </p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #ff6b35, #ff8c42, #ffa726); color: white; padding: 40px; border-radius: 20px; margin-bottom: 40px; box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 30px; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Features That Will Dazzle You</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div>
+                            <ul style="font-size: 1.4rem; line-height: 2; list-style: none; padding: 0;">
+                                <li>✓ Adjustable chart size (2-6 columns)</li>
+                                <li>✓ Word List Manager</li>
+                                <li>✓ Word Editing Features</li>
+                                <li>✓ Interactive Practice Module</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul style="font-size: 1.4rem; line-height: 2; list-style: none; padding: 0;">
+                                <li>✓ Text Size Options</li>
+                                <li>✓ Dictionary Function</li>
+                                <li>✓ Audio Feature</li>
+                                <li>✓ Pre-loaded Sight Word Lists</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #fff3cd; border: 3px solid #ffc107; border-radius: 15px; padding: 30px; text-align: center;">
+                    <h4 style="color: #856404; font-size: 1.5rem; margin-bottom: 20px;">Perfect for Smart Screens!</h4>
+                    <p style="color: #856404; font-size: 1.2rem; line-height: 1.6;">
+                        The Interactive Word Wall truly shines on large Smart Screens, creating an engaging classroom experience that gets students excited about vocabulary practice. Populate charts with pre-loaded sight word lists and watch your classroom transform!
+                    </p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 25px 40px; border-radius: 15px; display: inline-block; font-size: 1.3rem; font-weight: bold;">
+                        Trust us - you will love the Interactive Word Wall!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Savings vs Tutors Section -->
+    <section style="padding: 80px 0; background: linear-gradient(135deg, #fff5f5, #fff0f0);">
+        <div class="container">
+            <h2 class="section-title">Tremendous Cost Savings vs. Traditional Tutoring</h2>
+            <p style="text-align: center; font-size: 1.6rem; color: #333; margin-bottom: 50px; font-weight: bold;">
+                Why frustrated parents are choosing PRA over expensive tutoring
+            </p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto;">
+                <div style="background: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid #dc3545;">
+                    <h3 style="color: #dc3545; font-size: 1.5rem; margin-bottom: 20px; text-align: center;">❌ Traditional Tutoring</h3>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <h4 style="color: #333; margin-bottom: 10px;">Accessibility Issues:</h4>
+                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Most tutors are available only 2-3 times per week for one hour sessions. This sporadic schedule is far too infrequent to create meaningful change in reading skills.</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <h4 style="color: #333; margin-bottom: 10px;">Limited Repetition:</h4>
+                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Tutors still use traditional methods. Your child needs HIGH repetition to grasp letter blending skills. No tutor can duplicate the practice and repetitions that PRA provides.</p>
+                    </div>
+                    
+                    <div style="background: #ffebee; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4 style="color: #d32f2f; margin-bottom: 10px;">Cost: $30/hour</h4>
+                        <p style="color: #666; font-size: 1.1rem;">$60-90/week = <strong style="color: #d32f2f;">Almost $400/month!</strong></p>
+                        <p style="color: #666; font-size: 1.1rem; margin-top: 10px;"><em>For subpar results using outdated methods</em></p>
+                    </div>
+                </div>
+                
+                <div style="background: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid #28a745;">
+                    <h3 style="color: #28a745; font-size: 1.5rem; margin-bottom: 20px; text-align: center;">✅ Pinnacle Reading Advantage</h3>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <h4 style="color: #333; margin-bottom: 10px;">24/7 Accessibility:</h4>
+                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Available anytime your student wants to practice. This gives you the ability to practice several times a day, creating the consistent exposure needed for mastery.</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <h4 style="color: #333; margin-bottom: 10px;">High Repetition Design:</h4>
+                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Repetition is literally designed into the PRA system and is at the core of its methodology. Exactly what your student needs to grasp blending skills quickly.</p>
+                    </div>
+                    
+                    <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4 style="color: #2e7d32; margin-bottom: 10px;">7-Day FREE Trial</h4>
+                        <p style="color: #666; font-size: 1.1rem;">Then just <strong style="color: #2e7d32;">$9.99/month</strong></p>
+                        <p style="color: #666; font-size: 1.1rem; margin-top: 10px;"><em>Cancel anytime - Revolutionary methodology that works</em></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 20px 40px; border-radius: 15px; display: inline-block; max-width: 600px;">
+                    <h3 style="margin-bottom: 10px;">Save Over $390/Month!</h3>
+                    <p style="margin: 0; font-size: 1.1rem;">Get superior results with PRA's proven methodology for a fraction of tutoring costs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Start Your FREE 7-Day Trial Today</h2>
+            <p style="text-align: center; font-size: 1.4rem; color: #666; margin-bottom: 20px; font-weight: bold;">
+                Experience the complete system risk-free - then just $9.99/month
+            </p>
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 15px 30px; border-radius: 25px; display: inline-block; font-weight: bold; font-size: 1.1rem;">
+                    🎉 FREE 7-Day Trial - No Credit Card Required - Cancel Anytime
+                </div>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="pricing-badge">7-Day FREE Trial</div>
+                <h3 style="color: #4b0082; font-size: 1.5rem; margin-bottom: 10px;">Try Everything FREE for 7 Days</h3>
+                <div class="price">FREE</div>
+                <div class="price-period">7-day trial • Then $9.99/month • Cancel anytime</div>
+                
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid #28a745;">
+                    <h4 style="color: #1a7531; margin-bottom: 10px;">What You Get Instantly:</h4>
+                    <div style="text-align: left;">
+                        <strong style="color: #1a7531;">✓ Complete 5-Program System</strong> (Value: $497)<br>
+                        <strong style="color: #1a7531;">✓ 25 Progressive Skill Challenges</strong> (Value: $197)<br>
+                        <strong style="color: #1a7531;">✓ 3,000+ Interactive Words</strong> (Value: $297)<br>
+                        <strong style="color: #1a7531;">✓ Multilingual Support</strong> (Value: $147)<br>
+                        <strong style="color: #1a7531;">✓ Lifetime Updates</strong> (Value: $97)
+                    </div>
+                    <div style="text-align: center; margin-top: 15px; font-size: 1.1rem;">
+                        <strong>Total Value: $1,235 → Your Price: $9.99/month</strong>
+                    </div>
+                </div>
+                
+                <ul class="pricing-features">
+                    <li>Interactive Decoding Blends Charts with 480 syllables</li>
+                    <li>Enhanced Word Workbook with phonetic breakdowns</li>
+                    <li>Progressive Sentence Reading System</li>
+                    <li>Custom Word Wall Builder with smart import</li>
+                    <li>Complete teacher & parent guides</li>
+                    <li>Audio pronunciation in multiple languages</li>
+                    <li>Progress tracking with 25 skill challenges</li>
+                    <li>Works on all devices - mobile, tablet, desktop</li>
+                    <li>Instant access - start learning today</li>
+
+                </ul>
+                
+                <a href="#" onclick="startSubscription()" class="cta-primary" style="width: 100%; text-align: center; margin: 20px 0; font-size: 1.2rem; padding: 20px;">
+                    Start Your FREE 7-Day Trial Now
+                </a>
+                
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; border: 1px solid #28a745; margin-top: 20px;">
+                    <strong style="color: #1a7531;">🎯 Risk-Free Trial:</strong> Try the complete system FREE for 7 days. 
+                    No credit card required. If you love it, continue for just $9.99/month. Cancel anytime with one click.
+                </div>
+                
+                <p style="font-size: 0.9rem; color: #666; margin-top: 15px;">
+                    No credit card required • Instant access • Cancel anytime • Full system access during trial
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="padding: 80px 0; background: linear-gradient(135deg, #e8f4fd, #d1ecf1);">
+        <div class="container">
+
+            
+            <!-- Video Testimonial Section - ADD YOUR VIDEOS HERE -->
+            <div style="margin-top: 60px; text-align: center;">
+                
+                <!-- Video Introduction Section -->
+                <div style="background: linear-gradient(135deg, #00bcd4, #26a69a); color: white; padding: 40px; border-radius: 20px; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; box-shadow: 0 15px 40px rgba(0,188,212,0.3);">
+                    <h3 style="color: white; font-size: 2.2rem; margin-bottom: 25px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">The Original PRA Success Story</h3>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; margin-bottom: 25px;">
+                        <p style="font-size: 1.3rem; line-height: 1.6; margin-bottom: 20px; color: white;">
+                            Before our interactive website existed, PRA was taught using <strong>homemade charts and flashcards</strong>. 
+                        </p>
+                        <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 20px; color: white;">
+                            Working just <span style="background: #ffd700; color: #333; padding: 4px 10px; border-radius: 6px; font-weight: bold;">45 minutes, 4 days a week</span>, these four kindergarteners went from <strong>not knowing their alphabet</strong> to reading <strong>five-syllable words</strong> in just three months.
+                        </p>
+                        <div style="border-left: 4px solid #ffd700; padding-left: 20px; margin: 25px 0;">
+                            <p style="font-size: 1.1rem; color: white; margin-bottom: 15px;">
+                                If homemade materials could produce these results, imagine what our professionally designed interactive platform can achieve.
+                            </p>
+                            <p style="font-size: 1.1rem; font-style: italic; color: white;">
+                                And to borrow a line from Mark Twain, "Comparing our interactive website to the techniques used to teach these students is like comparing lightning to a lightning bug."
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255,215,0,0.2); border: 2px solid #ffd700; padding: 20px; border-radius: 12px; margin-top: 25px;">
+                        <p style="font-size: 1.4rem; font-weight: bold; margin: 0; text-shadow: 0 1px 2px rgba(0,0,0,0.2); color: white;">
+                            Watch these real students demonstrate the power of systematic phonetic instruction 
+                        </p>
+                        <div style="font-size: 3rem; margin-top: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">⬇️</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: #1a5f7a; font-size: 2rem; margin-bottom: 30px;">See The Results For Yourself</h3>
+                
+                <!-- Video Placeholder - REPLACE WITH YOUR ACTUAL VIDEOS -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto;">
+                    
+                    <!-- Video 1 - PRA Success Story -->
+                    <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/9q8TMaoazAk?si=JFD5qB_rS0zReoV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    
+
+                    
+                </div>
+                
+                <p style="margin-top: 30px; color: #666; font-style: italic;">
+                    * Results may vary. Individual reading improvements depend on consistency and practice.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How quickly will I see results?</div>
+                <div class="faq-answer">
+                    The whole PRA approach centers around the Decoding Blends Charts. Once learned, they are exceptionally powerful. With regular practice, you could master them in between 3 to 5 weeks. However, once mastered, your reading skills tend to accelerate very quickly.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is this suitable for struggling readers?</div>
+                <div class="faq-answer">
+                    Absolutely! Our phonetic approach is especially effective for students who have struggled with traditional sight-word methods. The systematic syllable training bypasses common reading difficulties and builds confidence through proven success.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What ages is this appropriate for?</div>
+                <div class="faq-answer">
+                    The system works for learners aged 5 to adult. However, once the student masters their letter and vowel sounds, they can get started in PRA. Whether you're teaching early readers, helping struggling students catch up, or supporting ESL learners, the phonetic methodology adapts to any learning level.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do I need teaching experience to use this?</div>
+                <div class="faq-answer">
+                    No teaching experience required! Each program includes complete user guides with step-by-step instructions. Parents and teachers alike find the methodology easy to follow and implement successfully.
+                </div>
+            </div>
+            
+
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I cancel my subscription anytime?</div>
+                <div class="faq-answer">
+                    Yes, you can cancel your subscription at any time with no cancellation fees. Your access will continue until the end of your current billing period.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta">
+        <div class="container">
+            <h2>Ready to Transform Reading Skills Forever?</h2>
+            <p>
+                Join thousands of parents and teachers who have discovered the power of systematic phonetic instruction. 
+                Start your risk-free trial today - no credit card required.
+            </p>
+            <a href="#" onclick="startSubscription()" class="cta-primary">Start Your FREE 7-Day Trial - No Credit Card Required</a>
+            <a href="admin-dashboard.html" class="cta-primary" style="margin-top: 15px; background: rgba(255,255,255,0.2); border: 2px solid white;">View Admin Dashboard</a>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.9;">
+                ✓ 7-Day FREE Trial ✓ Instant Access to All 8 Programs ✓ Cancel Anytime ✓ No Risk
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Stripe payment processing
+
+        function startSubscription() {
+            console.log('🔥 UPDATED CODE RUNNING - Cache cleared successfully');
+            
+            // Track the conversion attempt
+            if (typeof gtag === 'function') {
+                gtag('event', 'begin_checkout', {
+                    currency: 'USD',
+                    value: 9.99,
+                    event_category: 'Subscription',
+                    event_label: window.abTestVersion || 'default'
+                });
+            }
+
+            // Check if Stripe is loaded
+            if (!window.Stripe) {
+                alert('Payment system is loading. Please wait a moment and try again.');
+                return;
+            }
+
+            const stripe = Stripe('pk_live_51RfMoZGarRQnrBZeGln3zaKolbQ5QFVwOEc44Jz8VCZf8M6G6WmSmvokHTy2Pzkz16HAL0uLKcEn0Lv9xGo7aE5r00mGRWRSDr');
+            
+            console.log('About to call redirectToCheckout with clean parameters...');
+            
+            stripe.redirectToCheckout({
+                lineItems: [{
+                    price: 'price_1RfNsXGaJDz4Wy8ThnuuEwqf',
+                    quantity: 1,
+                }],
+                mode: 'subscription',
+                successUrl: window.location.origin + '/student-dashboard.html?success=true&trial=true',
+                cancelUrl: window.location.origin + '/?canceled=true',
+            }).then(function (result) {
+                if (result.error) {
+                    console.error('Stripe checkout error:', result.error);
+                    alert('Payment error: ' + result.error.message);
+                } else {
+                    console.log('Stripe checkout successful!');
+                }
+            }).catch(function (error) {
+                console.error('Stripe checkout exception:', error);
+                alert('Payment system error: ' + error.message);
+            });
+        }
+
+        function accessPrograms() {
+            // Direct access to programs - payment required through dashboard
+            alert('Please start your free trial to access the educational programs.');
+            document.querySelector('.cta-primary').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // A/B Testing Content Switching
+        function implementABTesting() {
+            const version = window.abTestVersion;
+            
+            if (version === 'aggressive') {
+                // Switch to aggressive messaging
+                
+                // Hero headline change
+                const heroSubtitle = document.querySelector('.hero-subtitle');
+                if (heroSubtitle) {
+                    heroSubtitle.innerHTML = `
+                        Revolutionary systematic phonetic method that transforms struggling readers into confident word-decoding machines. When students master our 480 phonetic patterns, <strong style="color: #ffd700;">no word can escape their onslaught</strong>. Used by thousands of families who've discovered the reading breakthrough schools refuse to teach.
+                    `;
+                }
+                
+                // Problem/Solution section - make "Words Have No Where To Hide!" more prominent
+                const gameChanger = document.querySelector('div[style*="The Game Changer:"]');
+                if (gameChanger && gameChanger.nextElementSibling) {
+                    gameChanger.nextElementSibling.innerHTML = `
+                        "With 480 letter blends as their arsenal, <strong>words become utterly defenseless</strong> against their reading attack. No multi-syllable word can withstand their systematic assault. <strong style="color: #4b0082; font-weight: bold; font-size: 1.2em;">WORDS HAVE NO WHERE TO HIDE!</strong>"
+                    `;
+                }
+                
+                // CTA buttons - more aggressive language
+                const ctaButtons = document.querySelectorAll('a[onclick="startSubscription()"]');
+                ctaButtons.forEach(button => {
+                    if (button.textContent.includes('Start FREE')) {
+                        button.textContent = 'UNLEASH Reading Power - FREE 7-Day Trial';
+                    } else if (button.textContent.includes('Reading Savior')) {
+                        button.textContent = 'Join The Reading Revolution';
+                    }
+                });
+                
+                // Social proof section - add more confident language
+                const socialProofSection = document.querySelector('.social-proof');
+                if (socialProofSection) {
+                    // Find and update key phrases to be more aggressive
+                    const testimonialQuotes = socialProofSection.querySelectorAll('blockquote, p');
+                    testimonialQuotes.forEach(quote => {
+                        let text = quote.innerHTML;
+                        text = text.replace('amazing to see', 'mind-blowing to witness');
+                        text = text.replace('it\'s kind of fun', 'it\'s absolutely thrilling');
+                        quote.innerHTML = text;
+                    });
+                }
+                
+                // Track aggressive version page view
+                trackSectionView('Aggressive_Version_Loaded', version);
+            } else {
+                // Default gentle version
+                trackSectionView('Gentle_Version_Loaded', version);
+            }
+        }
+        
+        // Enhanced CTA tracking
+        function enhancedStartSubscription() {
+            trackTrialStart(window.abTestVersion);
+            trackCTAClick('Start_Trial_Button', window.abTestVersion);
+            startSubscription();
+        }
+        
+        // Update all CTA buttons to use enhanced tracking
+        document.querySelectorAll('a[onclick="startSubscription()"]').forEach(button => {
+            button.setAttribute('onclick', 'enhancedStartSubscription()');
+        });
+        
+        // Implement A/B testing when page loads
+        document.addEventListener('DOMContentLoaded', implementABTesting);
+        
+        // Track section visibility for engagement metrics
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionName = entry.target.getAttribute('data-section') || 
+                                      entry.target.querySelector('h2, h3')?.textContent?.substring(0, 20) || 
+                                      'Unknown_Section';
+                    trackSectionView(sectionName.replace(/\s+/g, '_'), window.abTestVersion);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe key sections for engagement tracking
+        document.querySelectorAll('section, .hero, .social-proof').forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Smooth scrolling for anchor links  
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
