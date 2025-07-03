@@ -1,0 +1,8 @@
+{
+  "name": "pinnacle-reading-advantage",
+  "version": "1.0.0",
+  "description": "Educational platform with Stripe payment processing",
+  "dependencies": {
+    "stripe": "^18.2.1"
+  }
+}
