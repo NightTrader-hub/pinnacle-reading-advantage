@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Your Free Trial - Pinnacle Reading Advantage</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-xl p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">Start Your Free Trial</h1>
+                <p class="text-gray-600">7-day free trial, then $9.99/month. Cancel anytime.</p>
+            </div>
+
+            <!-- Using div instead of form to avoid any form submission behavior -->
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <input type="email" id="email" name="email" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Create Password</label>
+                    <input type="password" id="password" name="password" required minlength="6"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <p class="text-sm text-gray-500 mt-1">Minimum 6 characters</p>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <h3 class="font-semibold text-blue-800 mb-2">What You Get:</h3>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <li>✓ 7-day free trial</li>
+                        <li>✓ Access to all 10 educational programs</li>
+                        <li>✓ Progress tracking and analytics</li>
+                        <li>✓ Cancel anytime</li>
+                    </ul>
+                </div>
+
+                <!-- Using button with onclick instead of form submission -->
+                <button onclick="createTrialAccount()" id="signupBtn"
+                    class="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-200 font-semibold">
+                    Start Free Trial - No Payment Required
+                </button>
+            </div>
+
+            <div id="errorMessage" class="mt-4 text-red-600 text-sm text-center hidden"></div>
+            <div id="successMessage" class="mt-4 text-green-600 text-sm text-center hidden"></div>
+
+            <div class="mt-6 text-center text-sm text-gray-600">
+                <p>Already have an account? 
+                    <a href="/login.html" class="text-blue-600 hover:text-blue-500">Sign in here</a>
+                </p>
+                <p class="mt-2">
+                    <a href="/" class="text-gray-500 hover:text-gray-700">← Back to home</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Using window.createTrialAccount to avoid any form event conflicts
+        window.createTrialAccount = function() {
+            console.log('🟢 createTrialAccount function called - NO API CALLS');
+            
+            const signupBtn = document.getElementById('signupBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Clear previous messages
+            errorMessage.classList.add('hidden');
+            successMessage.classList.add('hidden');
+            
+            // Get form data directly
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            console.log('📝 Form data collected:', { firstName, lastName, email, passwordLength: password.length });
+            
+            // Validation
+            if (!firstName || !lastName || !email || !password) {
+                console.log('❌ Validation failed: missing fields');
+                errorMessage.textContent = 'Please fill in all fields.';
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+            
+            if (password.length < 6) {
+                console.log('❌ Validation failed: password too short');
+                errorMessage.textContent = 'Password must be at least 6 characters.';
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+            
+            console.log('✅ Validation passed');
+            
+            // Disable button
+            signupBtn.disabled = true;
+            signupBtn.textContent = 'Creating Account...';
+            
+            // Create trial user data
+            const trialUser = {
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                password: password,
+                trialStart: new Date().toISOString(),
+                trialStatus: 'active',
+                accountType: 'trial',
+                trialExpires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+                createdAt: new Date().toISOString()
+            };
+            
+            console.log('💾 Storing trial user data in localStorage');
+            
+            // Store in localStorage
+            localStorage.setItem('trialUser', JSON.stringify(trialUser));
+            localStorage.setItem('userAuthenticated', 'true');
+            localStorage.setItem('authMethod', 'trial');
+            
+            console.log('✅ Data stored successfully');
+            
+            // Show success message
+            successMessage.textContent = 'Free trial activated! Redirecting to dashboard...';
+            successMessage.classList.remove('hidden');
+            
+            console.log('🔄 Redirecting to dashboard in 2 seconds');
+            
+            // Redirect to dashboard
+            setTimeout(function() {
+                console.log('🚀 Redirecting now to student-dashboard-working.html');
+                window.location.href = 'student-dashboard.html';
+            }, 2000);
+        };
+        
+        // Add enter key support for better UX
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                createTrialAccount();
+            }
+        });
+        
+        console.log('🟢 Fresh trial signup script loaded - NO FORM EVENTS, NO FETCH CALLS');
+    </script>
+</body>
+</html>
